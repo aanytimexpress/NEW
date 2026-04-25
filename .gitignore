@@ -29,5 +29,9 @@ Thumbs.db
 # misc
 *.pem
 *.log
+live-tunnel.log
+live-tunnel.err
+frontend-live.log
+backend-run.log
 tmp
 temp
