@@ -1,0 +1,34 @@
+{
+  "admin": {
+    "title": "Bogura Kothon CMS",
+    "overview": "Overview",
+    "articles": "Articles",
+    "settings": "Settings",
+    "homepageBuilder": "Homepage Builder",
+    "menus": "Mega Menu Builder",
+    "ads": "Ads Manager",
+    "media": "Media Library",
+    "users": "User & Roles",
+    "activity": "Activity Logs",
+    "maintenance": "Maintenance Mode"
+  },
+  "labels": {
+    "draft": "Draft",
+    "review": "In Review",
+    "published": "Published",
+    "scheduled": "Scheduled",
+    "save": "Save",
+    "publish": "Publish",
+    "search": "Search",
+    "addWidget": "Add Widget",
+    "dragDrop": "Drag and drop to reorder sections"
+  },
+  "auth": {
+    "loginTitle": "Admin Dashboard Login",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout",
+    "unauthorized": "You need admin/editor access."
+  }
+}

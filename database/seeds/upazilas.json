@@ -1,0 +1,18 @@
+[
+  {
+    "districtSlug": "bogura",
+    "slug": "bogura-sadar",
+    "translations": {
+      "bn": { "name": "বগুড়া সদর" },
+      "en": { "name": "Bogura Sadar" }
+    }
+  },
+  {
+    "districtSlug": "bogura",
+    "slug": "shajahanpur",
+    "translations": {
+      "bn": { "name": "শাজাহানপুর" },
+      "en": { "name": "Shajahanpur" }
+    }
+  }
+]

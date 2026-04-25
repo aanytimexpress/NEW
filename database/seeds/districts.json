@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "bogura",
+    "translations": {
+      "bn": { "name": "বগুড়া" },
+      "en": { "name": "Bogura" }
+    },
+    "latitude": 24.8465,
+    "longitude": 89.3776
+  }
+]

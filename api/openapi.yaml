@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: Bogura Kothon Newsroom API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api/v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Article:
+      type: object
+      properties:
+        slug: { type: string }
+        status: { type: string }
+        translations:
+          type: object
+        badges:
+          type: array
+          items: { type: string }
+paths:
+  /auth/login:
+    post:
+      summary: Login with secure cookie + token response
+  /auth/signup:
+    post:
+      summary: Register new user
+  /articles:
+    get:
+      summary: List articles with locale/category/date filters
+    post:
+      summary: Create draft article
+      security:
+        - bearerAuth: []
+  /articles/{id}/status:
+    post:
+      summary: Move article through workflow (review/approve/publish)
+      security:
+        - bearerAuth: []
+  /articles/{id}/schedule:
+    post:
+      summary: Schedule article publish
+      security:
+        - bearerAuth: []
+  /articles/{id}/flags:
+    patch:
+      summary: Manage breaking/trending/live flags
+      security:
+        - bearerAuth: []
+  /articles/{id}/revisions:
+    get:
+      summary: List revision history
+      security:
+        - bearerAuth: []
+  /articles/{id}/revisions/rollback:
+    post:
+      summary: Roll back article to a previous revision index
+      security:
+        - bearerAuth: []
+  /categories:
+    get:
+      summary: List categories
+    post:
+      summary: Create category
+      security:
+        - bearerAuth: []
+  /users:
+    get:
+      summary: List users by role
+      security:
+        - bearerAuth: []
+  /comments:
+    get:
+      summary: List comments
+    post:
+      summary: Create comment
+  /comments/{id}/moderate:
+    patch:
+      summary: Approve/reject/spam moderation
+      security:
+        - bearerAuth: []
+  /homepage-sections:
+    get:
+      summary: Read homepage builder blocks
+    put:
+      summary: Upsert homepage section config
+      security:
+        - bearerAuth: []
+  /admin-controls:
+    get:
+      summary: Get super admin settings controls
+      security:
+        - bearerAuth: []
+    put:
+      summary: Upsert admin control value
+      security:
+        - bearerAuth: []
+  /admin-controls/breaking-news:
+    put:
+      summary: Set curated breaking article list
+      security:
+        - bearerAuth: []
+  /admin-controls/trending-news:
+    put:
+      summary: Set curated trending article list
+      security:
+        - bearerAuth: []
+  /ads:
+    get:
+      summary: Fetch ad slots
+    post:
+      summary: Create ad rule
+      security:
+        - bearerAuth: []
+  /notifications:
+    get:
+      summary: List notifications
+      security:
+        - bearerAuth: []
+    post:
+      summary: Create notification
+      security:
+        - bearerAuth: []
+  /push-subscriptions:
+    post:
+      summary: Register web push subscription
+    get:
+      summary: List active push subscriptions
+      security:
+        - bearerAuth: []

@@ -1,0 +1,85 @@
+{
+  "site": {
+    "name": "Bogura Kothon",
+    "tagline": "Modern multilingual newsroom"
+  },
+  "menu": {
+    "home": "Home",
+    "latest": "Latest News",
+    "politics": "Politics",
+    "local": "Local News",
+    "international": "International",
+    "sports": "Sports",
+    "business": "Business",
+    "technology": "Technology",
+    "entertainment": "Entertainment",
+    "editorial": "Editorial",
+    "opinion": "Opinion",
+    "video": "Video News",
+    "gallery": "Photo Gallery",
+    "eventCalendar": "Event Calendar",
+    "jobCircular": "Job Circular",
+    "tenderNotice": "Tender Notice",
+    "announcement": "Public Announcement",
+    "obituary": "Obituary",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "actions": {
+    "readMore": "Read More",
+    "subscribe": "Subscribe",
+    "search": "Search",
+    "viewAll": "View All",
+    "installApp": "Install App",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "auth": {
+    "loginTitle": "Login to Bogura Kothon",
+    "registerTitle": "Create an account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginHelp": "Use your newsroom account credentials.",
+    "registerHelp": "Create a reader or contributor account.",
+    "adminLogin": "Admin Login"
+  },
+  "home": {
+    "breaking": "Breaking",
+    "hero": "Top Story",
+    "trending": "Trending",
+    "latest": "Latest Feed",
+    "video": "Video News",
+    "gallery": "Photo Gallery",
+    "popular": "Most Read",
+    "newsletter": "Newsletter",
+    "ads": "Advertisement"
+  },
+  "newsletter": {
+    "title": "Daily News Brief",
+    "desc": "Get key Bogura updates every morning.",
+    "placeholder": "Email address"
+  },
+  "pages": {
+    "aboutTitle": "About Bogura Kothon",
+    "contactTitle": "Contact",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms & Conditions",
+    "archiveTitle": "Archive",
+    "searchTitle": "Search News",
+    "authorTitle": "Author Profile"
+  },
+  "seo": {
+    "homeTitle": "Bogura Kothon | Multilingual Digital Newsroom",
+    "homeDescription": "Live and verified news from Bogura in Bangla and English."
+  },
+  "badges": {
+    "updated": "Updated",
+    "correction": "Correction",
+    "exclusive": "Exclusive",
+    "fact_check": "Fact Check",
+    "sponsored": "Sponsored",
+    "live": "Live"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "site": {
+    "name": "বগুড়া কথন",
+    "tagline": "আধুনিক দ্বিভাষিক নিউজরুম"
+  },
+  "menu": {
+    "home": "হোম",
+    "latest": "সর্বশেষ",
+    "politics": "রাজনীতি",
+    "local": "স্থানীয়",
+    "international": "আন্তর্জাতিক",
+    "sports": "খেলা",
+    "business": "ব্যবসা",
+    "technology": "প্রযুক্তি",
+    "entertainment": "বিনোদন",
+    "editorial": "সম্পাদকীয়",
+    "opinion": "মতামত",
+    "video": "ভিডিও সংবাদ",
+    "gallery": "ফটো গ্যালারি",
+    "eventCalendar": "ইভেন্ট ক্যালেন্ডার",
+    "jobCircular": "চাকরির সার্কুলার",
+    "tenderNotice": "টেন্ডার নোটিশ",
+    "announcement": "জনসাধারণের ঘোষণা",
+    "obituary": "শোক সংবাদ",
+    "about": "আমাদের সম্পর্কে",
+    "contact": "যোগাযোগ"
+  },
+  "actions": {
+    "readMore": "বিস্তারিত",
+    "subscribe": "সাবস্ক্রাইব",
+    "search": "খুঁজুন",
+    "viewAll": "সব দেখুন",
+    "installApp": "অ্যাপ ইনস্টল",
+    "login": "লগইন",
+    "register": "রেজিস্টার",
+    "logout": "লগআউট"
+  },
+  "auth": {
+    "loginTitle": "বগুড়া কথনে লগইন",
+    "registerTitle": "নতুন অ্যাকাউন্ট তৈরি করুন",
+    "email": "ইমেইল",
+    "password": "পাসওয়ার্ড",
+    "name": "নাম",
+    "loginHelp": "নিউজরুম অ্যাকাউন্ট তথ্য ব্যবহার করুন।",
+    "registerHelp": "রিডার বা কনট্রিবিউটর অ্যাকাউন্ট তৈরি করুন।",
+    "adminLogin": "এডমিন লগইন"
+  },
+  "home": {
+    "breaking": "ব্রেকিং",
+    "hero": "প্রধান সংবাদ",
+    "trending": "ট্রেন্ডিং",
+    "latest": "সর্বশেষ ফিড",
+    "video": "ভিডিও সংবাদ",
+    "gallery": "ফটো গ্যালারি",
+    "popular": "সবচেয়ে পঠিত",
+    "newsletter": "নিউজলেটার",
+    "ads": "বিজ্ঞাপন"
+  },
+  "newsletter": {
+    "title": "দৈনিক নিউজ ব্রিফ",
+    "desc": "প্রতিদিন সকালে বগুড়ার গুরুত্বপূর্ণ আপডেট পান।",
+    "placeholder": "ইমেইল ঠিকানা"
+  },
+  "pages": {
+    "aboutTitle": "বগুড়া কথন সম্পর্কে",
+    "contactTitle": "যোগাযোগ",
+    "privacyTitle": "প্রাইভেসি পলিসি",
+    "termsTitle": "শর্তাবলী",
+    "archiveTitle": "আর্কাইভ",
+    "searchTitle": "সংবাদ খুঁজুন",
+    "authorTitle": "লেখক প্রোফাইল"
+  },
+  "seo": {
+    "homeTitle": "বগুড়া কথন | দ্বিভাষিক ডিজিটাল নিউজরুম",
+    "homeDescription": "বগুড়ার যাচাইকৃত এবং সর্বশেষ খবর বাংলা ও ইংরেজিতে।"
+  },
+  "badges": {
+    "updated": "আপডেট",
+    "correction": "সংশোধনী",
+    "exclusive": "এক্সক্লুসিভ",
+    "fact_check": "ফ্যাক্ট চেক",
+    "sponsored": "স্পন্সরড",
+    "live": "লাইভ"
+  }
+}

@@ -1,0 +1,44 @@
+import { Router } from "express";
+import adRoutes from "./ad.routes.js";
+import adminControlRoutes from "./admin-control.routes.js";
+import articleRoutes from "./article.routes.js";
+import authRoutes from "./auth.routes.js";
+import categoryRoutes from "./category.routes.js";
+import commentRoutes from "./comment.routes.js";
+import geoRoutes from "./geo.routes.js";
+import homepageSectionRoutes from "./homepage-section.routes.js";
+import languageRoutes from "./language.routes.js";
+import mediaRoutes from "./media.routes.js";
+import menuRoutes from "./menu.routes.js";
+import notificationRoutes from "./notification.routes.js";
+import pageRoutes from "./page.routes.js";
+import pushSubscriptionRoutes from "./push-subscription.routes.js";
+import searchRoutes from "./search.routes.js";
+import settingRoutes from "./setting.routes.js";
+import subscriberRoutes from "./subscriber.routes.js";
+import systemRoutes from "./system.routes.js";
+import userRoutes from "./user.routes.js";
+
+const router = Router();
+
+router.use("/auth", authRoutes);
+router.use("/admin-controls", adminControlRoutes);
+router.use("/articles", articleRoutes);
+router.use("/categories", categoryRoutes);
+router.use("/users", userRoutes);
+router.use("/comments", commentRoutes);
+router.use("/homepage-sections", homepageSectionRoutes);
+router.use("/languages", languageRoutes);
+router.use("/ads", adRoutes);
+router.use("/notifications", notificationRoutes);
+router.use("/push-subscriptions", pushSubscriptionRoutes);
+router.use("/media", mediaRoutes);
+router.use("/settings", settingRoutes);
+router.use("/menus", menuRoutes);
+router.use("/pages", pageRoutes);
+router.use("/geo", geoRoutes);
+router.use("/search", searchRoutes);
+router.use("/subscribers", subscriberRoutes);
+router.use("/system", systemRoutes);
+
+export default router;

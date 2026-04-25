@@ -1,0 +1,13 @@
+{
+  "breakingTicker": true,
+  "heroSlider": true,
+  "trendingBlock": true,
+  "latestFeed": true,
+  "categoryBlocks": true,
+  "videoBlock": true,
+  "photoGalleryBlock": true,
+  "popularSidebar": true,
+  "newsletterBlock": true,
+  "advertisementBlock": true,
+  "maintenanceMode": false
+}

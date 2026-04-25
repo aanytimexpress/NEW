@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 215 28% 17%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 28% 17%;
+  --primary: 193 88% 28%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 86% 45%;
+  --secondary-foreground: 215 28% 17%;
+  --muted: 210 40% 97%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 356 77% 54%;
+  --accent-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 193 88% 28%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+.news-container {
+  @apply mx-auto w-full max-w-7xl px-4 md:px-6;
+}

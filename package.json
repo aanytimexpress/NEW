@@ -1,0 +1,27 @@
+{
+  "name": "bogura-kothon-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready multilingual newsroom platform for Bogura Kothon",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "admin-dashboard"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace frontend\" \"npm run dev --workspace backend\" \"npm run dev --workspace admin-dashboard\"",
+    "build": "npm run build --workspace frontend && npm run build --workspace backend && npm run build --workspace admin-dashboard",
+    "lint": "npm run lint --workspace frontend && npm run lint --workspace backend && npm run lint --workspace admin-dashboard",
+    "format": "npm run format --workspaces --if-present",
+    "setup:repo": "node scripts/auto-create-repo.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "next": "^16.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
