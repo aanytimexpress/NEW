@@ -22,6 +22,9 @@ export function auditTrail(req: Request, res: Response, next: NextFunction): voi
         statusCode: res.statusCode,
         requestId: req.requestId
       }
+    }).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.warn("Activity log write skipped:", (error as Error).message);
     });
   });
   next();

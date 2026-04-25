@@ -16,7 +16,7 @@ export function NewsletterBlock() {
     setStatus("...");
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/subscribers`,
+        `${process.env.NEXT_PUBLIC_API_URL ?? "/api/v1"}/subscribers`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

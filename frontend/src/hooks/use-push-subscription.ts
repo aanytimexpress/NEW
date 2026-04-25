@@ -33,13 +33,14 @@ export function usePushSubscription() {
 
     setState((prev) => ({ ...prev, loading: true }));
     try {
+      const api = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicKey)
       });
 
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/push-subscriptions`, {
+      await fetch(`${api}/push-subscriptions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -65,13 +66,14 @@ export function usePushSubscription() {
 
     setState((prev) => ({ ...prev, loading: true }));
     try {
+      const api = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.getSubscription();
       if (!subscription) {
         setState((prev) => ({ ...prev, subscribed: false, loading: false }));
         return true;
       }
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/push-subscriptions/unsubscribe`, {
+      await fetch(`${api}/push-subscriptions/unsubscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ endpoint: subscription.endpoint })

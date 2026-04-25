@@ -18,13 +18,23 @@ export function HeroSlider({ items }: HeroSliderProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (items.length <= 1) {
+      setIndex(0);
+      return;
+    }
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [items.length]);
 
-  const active = items[index];
+  if (items.length === 0) {
+    return null;
+  }
+
+  const safeIndex = index >= items.length ? 0 : index;
+  const active = items[safeIndex];
 
   return (
     <section className="grid gap-5 lg:grid-cols-3">
@@ -66,7 +76,7 @@ export function HeroSlider({ items }: HeroSliderProps) {
             key={item.id}
             onClick={() => setIndex(i)}
             className={`w-full rounded-md border p-3 text-left transition-colors ${
-              i === index ? "bg-primary/10" : "bg-background hover:bg-muted"
+              i === safeIndex ? "bg-primary/10" : "bg-background hover:bg-muted"
             }`}
           >
             <h3 className="text-sm font-semibold leading-snug">{item.title}</h3>

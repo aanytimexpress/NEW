@@ -20,7 +20,7 @@ export function AuthActions() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api/v1";
+    const api = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
     void fetch(`${api}/auth/me`, {
       credentials: "include",
       signal: controller.signal
@@ -38,7 +38,7 @@ export function AuthActions() {
   }, []);
 
   async function logout() {
-    const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api/v1";
+    const api = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
     await fetch(`${api}/auth/logout`, {
       method: "POST",
       credentials: "include"

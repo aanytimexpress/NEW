@@ -25,7 +25,7 @@ export function AuthForm({ mode }: AuthFormProps) {
     event.preventDefault();
     setLoading(true);
     setError("");
-    const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api/v1";
+    const api = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
     const endpoint = mode === "login" ? "login" : "signup";
 
     try {

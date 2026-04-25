@@ -7,12 +7,13 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().default(5000),
   MONGODB_URI: z.string().min(1, "MONGODB_URI is required"),
+  ALLOW_IN_MEMORY_DB: z.string().default("auto"),
   REDIS_URL: z.string().default("redis://localhost:6379"),
   JWT_ACCESS_SECRET: z.string().min(1),
   JWT_REFRESH_SECRET: z.string().min(1),
   JWT_ACCESS_EXPIRES_IN: z.string().default("15m"),
   JWT_REFRESH_EXPIRES_IN: z.string().default("30d"),
-  COOKIE_DOMAIN: z.string().default("localhost"),
+  COOKIE_DOMAIN: z.string().default(""),
   COOKIE_SECURE: z
     .string()
     .default("false")
@@ -39,6 +40,9 @@ if (!parsed.success) {
 
 export const env = {
   ...parsed.data,
+  allowInMemoryDb:
+    parsed.data.ALLOW_IN_MEMORY_DB === "true" ||
+    (parsed.data.ALLOW_IN_MEMORY_DB === "auto" && parsed.data.NODE_ENV !== "production"),
   corsOrigins: parsed.data.CORS_ORIGINS.split(",").map((origin) => origin.trim()),
   adminIpWhitelist: parsed.data.ADMIN_IP_WHITELIST.split(",").map((ip) => ip.trim())
 };

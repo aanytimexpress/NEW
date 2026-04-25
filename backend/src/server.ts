@@ -10,25 +10,35 @@ import { startNotificationDispatchJob } from "./jobs/notification-dispatch.job.j
 async function bootstrap() {
   const app = createApp();
   const server = createServer(app);
+  let databaseConnected = false;
 
   server.listen(env.PORT, () => {
     // eslint-disable-next-line no-console
     console.log(`Backend listening on http://localhost:${env.PORT}`);
   });
 
-  void connectDatabase().catch((error) => {
+  try {
+    await connectDatabase();
+    databaseConnected = true;
+  } catch (error) {
     // eslint-disable-next-line no-console
     console.warn("MongoDB connection failed, running in degraded mode:", error);
-  });
+  }
 
   void connectRedis().catch((error) => {
     // eslint-disable-next-line no-console
     console.warn("Redis connection skipped:", error);
   });
 
-  startScheduledPublishJob();
-  startTrendingRefreshJob();
-  startNotificationDispatchJob();
+  if (databaseConnected) {
+    startScheduledPublishJob();
+    startTrendingRefreshJob();
+    startNotificationDispatchJob();
+    return;
+  }
+
+  // eslint-disable-next-line no-console
+  console.warn("Background newsroom jobs are paused because database is unavailable.");
 }
 
 bootstrap().catch((error) => {

@@ -32,6 +32,9 @@ Thumbs.db
 live-tunnel.log
 live-tunnel.err
 frontend-live.log
+frontend-live.err
+backend-live.log
+backend-live.err
 backend-run.log
 tmp
 temp
