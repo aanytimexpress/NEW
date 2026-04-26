@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, type HydratedDocument } from "mongoose";
 import {
   ARTICLE_BADGES,
   ARTICLE_WORKFLOW_STATUS,
@@ -152,3 +152,4 @@ articleSchema.pre("validate", function setSlug(next) {
 });
 
 export const ArticleModel = model<IArticle>("Article", articleSchema);
+export type ArticleDocument = HydratedDocument<IArticle>;

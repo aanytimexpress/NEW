@@ -4,12 +4,12 @@ import {
   listAdsController,
   updateAdController
 } from "../controllers/ad.controller.js";
-import { requireAuth, requirePermission } from "../middlewares/auth.middleware.js";
+import { requireAdminPermission } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 router.get("/", listAdsController);
-router.post("/", requireAuth, requirePermission("ads:manage"), createAdController);
-router.patch("/:id", requireAuth, requirePermission("ads:manage"), updateAdController);
+router.post("/", ...requireAdminPermission("ads:manage"), createAdController);
+router.patch("/:id", ...requireAdminPermission("ads:manage"), updateAdController);
 
 export default router;

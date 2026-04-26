@@ -4,13 +4,12 @@ import {
   listUsersController,
   updateUserController
 } from "../controllers/user.controller.js";
-import { requireAuth, requirePermission } from "../middlewares/auth.middleware.js";
+import { requireAdminPermission } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.use(requireAuth);
-router.get("/", requirePermission("users:manage"), listUsersController);
-router.post("/", requirePermission("users:manage"), createUserController);
-router.patch("/:id", requirePermission("users:manage"), updateUserController);
+router.get("/", ...requireAdminPermission("users:manage"), listUsersController);
+router.post("/", ...requireAdminPermission("users:manage"), createUserController);
+router.patch("/:id", ...requireAdminPermission("users:manage"), updateUserController);
 
 export default router;

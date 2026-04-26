@@ -4,18 +4,13 @@ import {
   listCategoryController,
   updateCategoryController
 } from "../controllers/category.controller.js";
-import { requireAuth, requirePermission } from "../middlewares/auth.middleware.js";
+import { requireNewsroomPermission } from "../middlewares/auth.middleware.js";
 import { cacheResponse } from "../middlewares/cache.middleware.js";
 
 const router = Router();
 
 router.get("/", cacheResponse(300), listCategoryController);
-router.post("/", requireAuth, requirePermission("categories:manage"), createCategoryController);
-router.patch(
-  "/:id",
-  requireAuth,
-  requirePermission("categories:manage"),
-  updateCategoryController
-);
+router.post("/", ...requireNewsroomPermission("categories:manage"), createCategoryController);
+router.patch("/:id", ...requireNewsroomPermission("categories:manage"), updateCategoryController);
 
 export default router;

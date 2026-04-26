@@ -8,6 +8,15 @@ export const ROLES = {
 } as const;
 
 export type Role = (typeof ROLES)[keyof typeof ROLES];
+export const ALL_ROLES = Object.values(ROLES) as Role[];
+export const ADMIN_ROLES = [ROLES.SUPER_ADMIN, ROLES.ADMIN] as const;
+export const NEWSROOM_ROLES = [
+  ROLES.SUPER_ADMIN,
+  ROLES.ADMIN,
+  ROLES.EDITOR,
+  ROLES.REPORTER,
+  ROLES.AUTHOR
+] as const;
 
 export const ARTICLE_WORKFLOW_STATUS = {
   DRAFT: "draft",

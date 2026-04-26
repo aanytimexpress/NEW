@@ -84,4 +84,12 @@ export function hasPermission(role: Role, permission: Permission): boolean {
   return rolePermissions[role]?.includes(permission) ?? false;
 }
 
+export function hasAnyPermission(role: Role, permissions: readonly Permission[]): boolean {
+  return permissions.some((permission) => hasPermission(role, permission));
+}
+
+export function listPermissionsForRole(role: Role): Permission[] {
+  return [...(rolePermissions[role] ?? [])];
+}
+
 export type { Permission };

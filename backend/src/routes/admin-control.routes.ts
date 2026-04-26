@@ -5,21 +5,23 @@ import {
   manageTrendingNewsController,
   updateAdminControlController
 } from "../controllers/admin-control.controller.js";
-import { requireAuth, requirePermission } from "../middlewares/auth.middleware.js";
+import {
+  requireAdminPermission,
+  requireNewsroomPermission
+} from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.use(requireAuth);
-router.get("/", requirePermission("settings:manage"), getAdminControlsController);
-router.put("/", requirePermission("settings:manage"), updateAdminControlController);
+router.get("/", ...requireAdminPermission("settings:manage"), getAdminControlsController);
+router.put("/", ...requireAdminPermission("settings:manage"), updateAdminControlController);
 router.put(
   "/breaking-news",
-  requirePermission("homepage:manage"),
+  ...requireNewsroomPermission("homepage:manage"),
   manageBreakingNewsController
 );
 router.put(
   "/trending-news",
-  requirePermission("homepage:manage"),
+  ...requireNewsroomPermission("homepage:manage"),
   manageTrendingNewsController
 );
 

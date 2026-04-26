@@ -1,20 +1,27 @@
 import speakeasy from "speakeasy";
 import { StatusCodes } from "http-status-codes";
 import { env } from "../config/env.js";
-import { ROLES, type Role } from "../constants/roles.js";
-import { UserModel } from "../models/user.model.js";
+import { ROLES, type Locale, type Role } from "../constants/roles.js";
+import { UserModel, type UserDocument } from "../models/user.model.js";
 import { AppError } from "../utils/app-error.js";
 import {
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken
 } from "../utils/jwt.js";
+import { serializeAuthUser } from "../utils/serialize-auth-user.js";
 
 interface SignupInput {
   name: string;
   email: string;
   password: string;
-  role?: Role;
+  locale?: Locale;
+}
+
+export interface AuthSession {
+  accessToken: string;
+  refreshToken: string;
+  user: ReturnType<typeof serializeAuthUser>;
 }
 
 export async function signup(input: SignupInput) {
@@ -27,10 +34,11 @@ export async function signup(input: SignupInput) {
     name: input.name,
     email: input.email.toLowerCase(),
     password: input.password,
-    role: input.role ?? ROLES.SUBSCRIBER
+    role: ROLES.SUBSCRIBER,
+    locale: input.locale ?? "bn"
   });
 
-  return issueAuthTokens(user._id.toString(), user.role);
+  return issueAuthSession(user);
 }
 
 export async function login(input: {
@@ -44,6 +52,10 @@ export async function login(input: {
   );
   if (!user) {
     throw new AppError("Invalid credentials", StatusCodes.UNAUTHORIZED);
+  }
+
+  if (!user.isActive) {
+    throw new AppError("Account disabled", StatusCodes.FORBIDDEN);
   }
 
   const passwordValid = await user.comparePassword(input.password);
@@ -76,10 +88,14 @@ export async function login(input: {
   user.lastLoginAt = new Date();
   await user.save();
 
-  return issueAuthTokens(user._id.toString(), user.role);
+  return issueAuthSession(user);
 }
 
 export async function refreshSession(refreshToken: string) {
+  if (!refreshToken) {
+    throw new AppError("Refresh token missing", StatusCodes.UNAUTHORIZED);
+  }
+
   const payload = verifyRefreshToken(refreshToken);
   if (payload.type !== "refresh") {
     throw new AppError("Invalid refresh token", StatusCodes.UNAUTHORIZED);
@@ -90,7 +106,14 @@ export async function refreshSession(refreshToken: string) {
     throw new AppError("Invalid refresh token", StatusCodes.UNAUTHORIZED);
   }
 
-  return issueAuthTokens(user._id.toString(), user.role);
+  if (user.passwordChangedAt && payload.iat) {
+    const passwordChangedAtInSeconds = Math.floor(user.passwordChangedAt.getTime() / 1000);
+    if (passwordChangedAtInSeconds > payload.iat) {
+      throw new AppError("Refresh token expired after password change", StatusCodes.UNAUTHORIZED);
+    }
+  }
+
+  return issueAuthSession(user);
 }
 
 export async function setupTwoFactor(userId: string) {
@@ -139,4 +162,11 @@ function issueAuthTokens(userId: string, role: Role) {
   const accessToken = signAccessToken(userId, role);
   const refreshToken = signRefreshToken(userId, role);
   return { accessToken, refreshToken };
+}
+
+function issueAuthSession(user: UserDocument): AuthSession {
+  return {
+    ...issueAuthTokens(user._id.toString(), user.role),
+    user: serializeAuthUser(user)
+  };
 }

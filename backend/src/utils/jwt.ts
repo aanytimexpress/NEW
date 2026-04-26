@@ -6,6 +6,7 @@ interface TokenPayload {
   sub: string;
   role: Role;
   type: "access" | "refresh";
+  iat?: number;
 }
 
 export function signAccessToken(userId: string, role: Role): string {

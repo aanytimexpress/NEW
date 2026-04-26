@@ -1,13 +1,13 @@
 import bcrypt from "bcryptjs";
 import { Schema, model, type HydratedDocument } from "mongoose";
-import { ROLES, type Role } from "../constants/roles.js";
+import { LOCALES, ROLES, type Locale, type Role } from "../constants/roles.js";
 
 interface IUserBase {
   name: string;
   email: string;
   password: string;
   role: Role;
-  locale: "bn" | "en";
+  locale: Locale;
   bio?: string;
   avatarUrl?: string;
   district?: Schema.Types.ObjectId;
@@ -17,6 +17,7 @@ interface IUserBase {
   twoFASecret?: string;
   adminIpWhitelist: string[];
   lastLoginAt?: Date;
+  passwordChangedAt?: Date;
 }
 
 export interface IUser extends IUserBase {
@@ -34,7 +35,7 @@ const userSchema = new Schema<IUser>(
       default: ROLES.SUBSCRIBER,
       required: true
     },
-    locale: { type: String, enum: ["bn", "en"], default: "bn" },
+    locale: { type: String, enum: LOCALES, default: "bn" },
     bio: { type: String },
     avatarUrl: { type: String },
     district: { type: Schema.Types.ObjectId, ref: "District" },
@@ -43,10 +44,14 @@ const userSchema = new Schema<IUser>(
     is2FAEnabled: { type: Boolean, default: false },
     twoFASecret: { type: String, select: false },
     adminIpWhitelist: [{ type: String }],
-    lastLoginAt: { type: Date }
+    lastLoginAt: { type: Date },
+    passwordChangedAt: { type: Date }
   },
   { timestamps: true }
 );
+
+userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ role: 1, isActive: 1 });
 
 userSchema.pre("save", async function onSave(next) {
   if (!this.isModified("password")) {
@@ -55,6 +60,7 @@ userSchema.pre("save", async function onSave(next) {
   }
   const salt = await bcrypt.genSalt(12);
   this.password = await bcrypt.hash(this.password, salt);
+  this.passwordChangedAt = new Date();
   next();
 });
 

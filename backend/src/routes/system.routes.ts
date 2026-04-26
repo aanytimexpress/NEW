@@ -4,13 +4,12 @@ import {
   listActivityLogsController,
   restoreController
 } from "../controllers/system.controller.js";
-import { requireAuth, requirePermission } from "../middlewares/auth.middleware.js";
+import { requireAdminPermission } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.use(requireAuth);
-router.get("/logs", requirePermission("logs:view"), listActivityLogsController);
-router.get("/backup", requirePermission("backup:manage"), backupController);
-router.post("/restore", requirePermission("backup:manage"), restoreController);
+router.get("/logs", ...requireAdminPermission("logs:view"), listActivityLogsController);
+router.get("/backup", ...requireAdminPermission("backup:manage"), backupController);
+router.post("/restore", ...requireAdminPermission("backup:manage"), restoreController);
 
 export default router;

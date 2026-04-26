@@ -96,15 +96,18 @@ async function seed() {
     )
   );
 
+  const superAdminName = process.env.SUPER_ADMIN_NAME || "Bogura Kothon Super Admin";
   const superAdminEmail = process.env.SUPER_ADMIN_EMAIL || "superadmin@bogurakothon.com";
   const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD || "ChangeMeNow123!";
+  const superAdminLocale = process.env.SUPER_ADMIN_LOCALE === "en" ? "en" : "bn";
   const existingAdmin = await UserModel.findOne({ email: superAdminEmail });
   if (!existingAdmin) {
     await UserModel.create({
-      name: "Super Admin",
+      name: superAdminName,
       email: superAdminEmail,
       password: superAdminPassword,
-      role: ROLES.SUPER_ADMIN
+      role: ROLES.SUPER_ADMIN,
+      locale: superAdminLocale
     });
   }
 

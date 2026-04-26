@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { ARTICLE_WORKFLOW_STATUS, ROLES } from "../constants/roles.js";
+import { ARTICLE_WORKFLOW_STATUS } from "../constants/roles.js";
 import { ArticleModel } from "../models/article.model.js";
 import { TagModel } from "../models/tag.model.js";
 import { asyncHandler } from "../utils/async-handler.js";
@@ -172,17 +172,8 @@ export const getArticleController = asyncHandler(async (req: Request, res: Respo
 
 export const updateArticleController = asyncHandler(async (req: Request, res: Response) => {
   const user = req.authUser!;
-  const article = await ArticleModel.findById(req.params.id);
+  const article = req.authArticle ?? (await ArticleModel.findById(req.params.id));
   if (!article) throw new AppError("Article not found", StatusCodes.NOT_FOUND);
-
-  const isOwner = article.author.toString() === user._id.toString();
-  const isPrivileged =
-    user.role === ROLES.ADMIN ||
-    user.role === ROLES.SUPER_ADMIN ||
-    user.role === ROLES.EDITOR;
-  if (!isOwner && !isPrivileged) {
-    throw new AppError("You cannot edit this article", StatusCodes.FORBIDDEN);
-  }
 
   const payload = req.body;
   Object.assign(article, payload);
@@ -218,10 +209,6 @@ export const changeArticleStatusController = asyncHandler(
 
 export const scheduleArticleController = asyncHandler(async (req: Request, res: Response) => {
   const user = req.authUser!;
-  if (user.role !== ROLES.ADMIN && user.role !== ROLES.SUPER_ADMIN) {
-    throw new AppError("Only admin can schedule publication", StatusCodes.FORBIDDEN);
-  }
-
   const article = await ArticleModel.findById(req.params.id);
   if (!article) throw new AppError("Article not found", StatusCodes.NOT_FOUND);
 
